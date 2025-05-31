@@ -1,10 +1,13 @@
 <?php
 
-namespace Vertuoza\Api\Graphql\Resolvers\Settings\ ;
+namespace Vertuoza\Api\Graphql\Resolvers\Settings\Collaborators;
 
+use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NonNull;
-use GraphQL\Type\Definition\ObjectType;
+use Vertuoza\Api\Context\VertuozaContext;
+use Vertuoza\Api\Graphql\Context\RequestContext;
 use Vertuoza\Api\Graphql\Types;
+
 
 
 class CollaboratorQuery
@@ -28,7 +31,7 @@ class CollaboratorQuery
                 'type' => new NonNull(new ListOfType(Types::get(Collaborator::class))),
                 'resolve' => static function ($rootValue, $args, RequestContext $context){
                     return $context->useCases->collaborator
-                        ->collaboratorsFindMany
+                        ->collaboratorFindMany
                         ->handle($context);
                 }
 ],
